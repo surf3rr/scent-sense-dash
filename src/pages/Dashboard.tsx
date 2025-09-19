@@ -3,17 +3,46 @@ import MetricCard from "@/components/MetricCard";
 import FreshnessScore from "@/components/FreshnessScore";
 import DeviceStatus from "@/components/DeviceStatus";
 import SensorHistory from "@/components/SensorHistory";
-
-// Mock data - will be replaced with real ESP32 sensor data via Supabase
-const mockSensorData = Array.from({ length: 24 }, (_, i) => ({
-  time: `${String(i).padStart(2, '0')}:00`,
-  temperature: 25 + Math.sin(i / 4) * 3 + Math.random() * 2,
-  humidity: 50 + Math.cos(i / 3) * 10 + Math.random() * 5,
-  nh3: 90 + Math.sin(i / 2) * 20 + Math.random() * 10,
-  ch4: 800 + Math.cos(i / 5) * 100 + Math.random() * 50
-}));
+import { useSensorData } from "@/hooks/useSensorData";
 
 const Dashboard = () => {
+  const {
+    latestReading,
+    historicalData,
+    deviceStatus,
+    freshnessScore,
+    isDeviceConnected,
+    loading,
+    error
+  } = useSensorData();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">Connecting to sensors...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-danger mb-4">Error: {error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
@@ -39,7 +68,7 @@ const Dashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           <MetricCard
             title="Temperature"
-            value="25.0"
+            value={latestReading ? latestReading.temperature.toFixed(1) : "--"}
             unit="°C"
             description="Ambient fridge temperature"
             icon={<Thermometer />}
@@ -47,7 +76,7 @@ const Dashboard = () => {
           />
           <MetricCard
             title="Humidity"
-            value="50.0"
+            value={latestReading ? latestReading.humidity.toFixed(1) : "--"}
             unit="%"
             description="Relative humidity level"
             icon={<Droplets />}
@@ -55,7 +84,7 @@ const Dashboard = () => {
           />
           <MetricCard
             title="NH₃ Level"
-            value="92.0"
+            value={latestReading ? latestReading.nh3.toFixed(1) : "--"}
             unit="ppm"
             description="Ammonia concentration"
             icon={<Wind />}
@@ -63,7 +92,7 @@ const Dashboard = () => {
           />
           <MetricCard
             title="CH₄ Level"
-            value="831.9"
+            value={latestReading ? latestReading.ch4.toFixed(1) : "--"}
             unit="ppm"
             description="Methane concentration"
             icon={<Flame />}
@@ -73,22 +102,19 @@ const Dashboard = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <FreshnessScore
-            score={5}
+            score={freshnessScore.score}
             maxScore={100}
-            status="poor"
-            message="Contents may be spoiled. Please check immediately."
+            status={freshnessScore.status}
+            message={freshnessScore.message}
           />
           <DeviceStatus
-            alerts={[
-              "SPOILAGE DETECTED - FERMENTATION",
-              "TEMP ALERT"
-            ]}
-            isConnected={true}
+            alerts={deviceStatus?.alerts || []}
+            isConnected={isDeviceConnected}
           />
         </div>
 
         <div className="grid grid-cols-1 gap-6">
-          <SensorHistory data={mockSensorData} />
+          <SensorHistory data={historicalData} />
         </div>
       </main>
     </div>

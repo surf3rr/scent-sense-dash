@@ -1,5 +1,31 @@
 # Welcome to your Lovable project
 
+## FreshView - ESP32 Freshness Monitoring System
+
+A real-time food freshness monitoring dashboard that receives data from ESP32 sensors via Firebase and displays comprehensive analytics.
+
+### Features
+- Real-time sensor data from ESP32 (temperature, humidity, NH₃, CH₄)
+- Firebase Realtime Database integration
+- Freshness scoring algorithm
+- Device status monitoring
+- Historical data visualization
+- Responsive dashboard design
+
+### Hardware Requirements
+- ESP32 development board
+- DHT22 temperature/humidity sensor
+- MQ-137 (NH₃) gas sensor
+- MQ-4 (CH₄) gas sensor
+- Breadboard and connecting wires
+
+### Setup Instructions
+1. Visit `/setup` route for Firebase configuration
+2. Create a Firebase project with Realtime Database
+3. Update Firebase config in `src/lib/firebase.ts`
+4. Upload the provided Arduino code to your ESP32
+5. Connect sensors according to the pin configuration
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/28d4a9c6-b77e-4ed6-b384-8de82702cf66
