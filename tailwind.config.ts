@@ -57,6 +57,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        temperature: "hsl(var(--temperature))",
+        humidity: "hsl(var(--humidity))",
+        nh3: "hsl(var(--nh3))",
+        ch4: "hsl(var(--ch4))",
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
+        danger: "hsl(var(--danger))",
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -8,35 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 210 11% 15%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 210 11% 15%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 210 11% 15%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 210 11% 15%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 11% 21%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 11% 21%;
+    --muted-foreground: 210 40% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 210 11% 21%;
+    --accent-foreground: 210 40% 98%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 210 11% 21%;
+    --input: 210 11% 21%;
+    --ring: 210 40% 98%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Sensor colors */
+    --temperature: 14 100% 57%;
+    --humidity: 204 100% 59%;
+    --nh3: 142 71% 45%;
+    --ch4: 25 95% 53%;
+    
+    /* Status colors */
+    --success: 142 71% 45%;
+    --warning: 45 93% 47%;
+    --danger: 0 84% 60%;
+    
+    /* Gradients */
+    --gradient-temperature: linear-gradient(135deg, hsl(14 100% 57%), hsl(14 100% 47%));
+    --gradient-humidity: linear-gradient(135deg, hsl(204 100% 59%), hsl(204 100% 49%));
+    --gradient-nh3: linear-gradient(135deg, hsl(142 71% 45%), hsl(142 71% 35%));
+    --gradient-ch4: linear-gradient(135deg, hsl(25 95% 53%), hsl(25 95% 43%));
 
     --sidebar-background: 0 0% 98%;
 
